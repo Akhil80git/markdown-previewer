@@ -1,64 +1,70 @@
-import React, { useState } from 'react';
-import { marked } from 'marked';
-import './App.css';
-
-function App() {
-  const [markdown, setMarkdown] = useState(`# Welcome to my Markdown Previewer!
-## This is a sub-heading...
-### And here's some other cool stuff:
-
-Heres some code, \`<div></div>\`, between 2 backticks.
-
-\`\`\`javascript
-// this is multi-line code:
-
-function anotherExample(firstLine, lastLine) {
-  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
-    return multiLineCode;
-  }
-}
-\`\`\`
-
-You can also make text **bold**... whoa!
-Or _italic_.
-Or... wait for it... **_both!_**
-And feel free to go crazy ~~crossing stuff out~~.
-
-There's also [links](https://www.freecodecamp.org), and
-> Block Quotes!
-
-And if you want to get really crazy, even tables:
-
-Wild Header | Crazy Header | Another Header?
------------- | ------------- | -------------
-Your content can | be here, and it | can be here....
-And here. | Okay. | I think we get it.
-
-- And of course there are lists.
-  - Some are bulleted.
-     - With different indentation levels.
-        - That look like this.
-
-1. And there are numbered lists too.
-1. Use just 1s if you want!
-1. And last but not least, let's not forget embedded images:
-
-![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
-`);
-
-  return (
-    <div className="App">
-      <textarea 
-        id="editor"
-        value={markdown}
-        onChange={(e) => setMarkdown(e.target.value)}
-      />
-      <div 
-        id="preview" 
-        dangerouslySetInnerHTML={{__html: marked(markdown)}}
-      />
-    </div>
-  );
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-export default App;
+#editor, #preview {
+  width: 80%;
+  min-height: 300px;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#editor {
+  font-family: monospace;
+  background-color: #fafafa;
+}
+
+#preview {
+  background-color: white;
+}
+
+/* Markdown styling */
+#preview h1 {
+  border-bottom: 2px solid #224b4b;
+  padding-bottom: 10px;
+}
+
+#preview h2 {
+  border-bottom: 1px solid #224b4b;
+  padding-bottom: 5px;
+}
+
+#preview code {
+  background: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+#preview pre {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+
+#preview blockquote {
+  border-left: 3px solid #224b4b;
+  color: #224b4b;
+  padding-left: 10px;
+  margin-left: 0;
+}
+
+#preview table {
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+#preview th, #preview td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#preview img {
+  max-width: 100%;
+}
