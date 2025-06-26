@@ -3,50 +3,60 @@ import { marked } from 'marked';
 import './App.css';
 
 function App() {
-  const [markdown, setMarkdown] = useState(`# Welcome to Markdown Previewer!
-## Try editing this text
-[Learn Markdown](https://www.markdownguide.org)
+  const [markdown, setMarkdown] = useState(`# Welcome to my Markdown Previewer!
+## This is a sub-heading...
+### And here's some other cool stuff:
 
-\`inline code\`
+Heres some code, \`<div></div>\`, between 2 backticks.
 
 \`\`\`javascript
-// code block
-function hello() {
-  return 'world';
+// this is multi-line code:
+
+function anotherExample(firstLine, lastLine) {
+  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+    return multiLineCode;
+  }
 }
 \`\`\`
 
-- List item 1
-- List item 2
+You can also make text **bold**... whoa!
+Or _italic_.
+Or... wait for it... **_both!_**
+And feel free to go crazy ~~crossing stuff out~~.
 
-> Blockquote
+There's also [links](https://www.freecodecamp.org), and
+> Block Quotes!
 
-**Bold text** and _italic text_
+And if you want to get really crazy, even tables:
 
-![React Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
+Wild Header | Crazy Header | Another Header?
+------------ | ------------- | -------------
+Your content can | be here, and it | can be here....
+And here. | Okay. | I think we get it.
+
+- And of course there are lists.
+  - Some are bulleted.
+     - With different indentation levels.
+        - That look like this.
+
+1. And there are numbered lists too.
+1. Use just 1s if you want!
+1. And last but not least, let's not forget embedded images:
+
+![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
 `);
 
-  const handleChange = (e) => {
-    setMarkdown(e.target.value);
-  };
-
   return (
-    <div className="app">
-      <div className="editor-container">
-        <h2>Editor</h2>
-        <textarea
-          id="editor"
-          value={markdown}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="preview-container">
-        <h2>Preview</h2>
-        <div
-          id="preview" 
-          dangerouslySetInnerHTML={{ __html: marked(markdown) }}
-        />
-      </div>
+    <div className="App">
+      <textarea 
+        id="editor"
+        value={markdown}
+        onChange={(e) => setMarkdown(e.target.value)}
+      />
+      <div 
+        id="preview" 
+        dangerouslySetInnerHTML={{__html: marked(markdown)}}
+      />
     </div>
   );
 }
